@@ -1,14 +1,14 @@
-#### About
+### About
 
 A script to automate the SSL/TLS certificate generation process using [LetsEncrypt](https://letsencrypt.org/) and [Docker](https://docs.docker.com/install/).
 
 
-#### Requirements
+### Requirements
 
 * [Docker](https://docs.docker.com/v17.12/install/)
 * [Docker Compose](https://docs.docker.com/compose/install/)
 
-#### How to use
+### How to use
 
 Run `get_ssl_cert.sh` script with the following options:
 
