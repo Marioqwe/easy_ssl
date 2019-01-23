@@ -1,4 +1,4 @@
-### About
+## About
 
 A script to automate the SSL/TLS certificate generation process using [LetsEncrypt](https://letsencrypt.org/) and [Docker](https://docs.docker.com/install/).
 
@@ -22,7 +22,6 @@ Run `get_ssl_cert.sh` script with the following options:
     -d       # domain name.
              # you can pass as many as you want (see example).
              # note that all domains you pass here will share the same SSL/TLS certificate.
-             # only use in 'prod' or 'test' mode.
     --email  # an email address to be supplied to LetsEncrypt.
              # this is useful if you want to LetsEncrypt to send you expiry notifications.
              # only use in 'prod' mode.
