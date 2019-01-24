@@ -18,6 +18,8 @@ Run `get_ssl_cert.sh` script with the following options:
     --info     # get additional information about certificates for your domain.
     --prod     # request certificate.
     --revoke   # revoke certificate.
+               # note that if you are revoking a certificate that was generated using
+               # "test" mode, you will need to pass the "--staging" option as well.
     
     # General
     --out-dir  # by default "~/easy_ssl/ssl".
