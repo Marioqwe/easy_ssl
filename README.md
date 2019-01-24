@@ -13,18 +13,25 @@ A script to automate the SSL/TLS certificate generation process using [LetsEncry
 Run `get_ssl_cert.sh` script with the following options:
 
     # Modes
-    --test   # runs certbot in staging mode.
-             # useful to test if your domain works.
-    --info   # get additional information about certificates for your domain.
-    --prod   # request certificate.
+    --test     # runs certbot in staging mode.
+               # useful to test if your domain works.
+    --info     # get additional information about certificates for your domain.
+    --prod     # request certificate.
+    
+    # General
+    --out-dir  # by default "~/easy_ssl/ssl".
+               # if used in "test" or "prod" mode, the directory will contain all
+               # output from certbot, including certificates.
+               # if used in "info" mode, the value should point to the directory
+               # generated in either "test" or "prod" mode.
     
     # Certbot options
-    -d       # domain name.
-             # you can pass as many as you want (see example).
-             # note that all domains you pass here will share the same SSL/TLS certificate.
-    --email  # an email address to be supplied to LetsEncrypt.
-             # this is useful if you want to LetsEncrypt to send you expiry notifications.
-             # only use in 'prod' mode.
+    -d         # domain name.
+               # you can pass as many as you want (see example).
+               # note that all domains you pass here will share the same SSL/TLS certificate.
+    --email    # an email address to be supplied to LetsEncrypt.
+               # this is useful if you want to LetsEncrypt to send you expiry notifications.
+               # only use in 'prod' mode.
     
 For example:
 
