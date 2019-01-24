@@ -2,9 +2,11 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-mkdir -p "${DIR}/ssl"
+SSL_DIR="${DIR}/ssl"
+SITE_DIR="${DIR}/site"
+mkdir -p "$SSL_DIR"
 
-POSITIONAL=()
+POSITIONAL=("--ssl-dir ${SSL_DIR} --site-dir ${SITE_DIR}")
 DOMAINS=()
 INFO=false
 TEST=false
