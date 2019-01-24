@@ -12,8 +12,8 @@ do
     key="$1"
 
     case ${key} in
-        --ssl-dir)
-            SSL_DIR=$2
+        --out-dir)
+            OUT_DIR=$2
             shift
             shift
             ;;
@@ -29,24 +29,12 @@ do
     esac
 done
 
-if [ -z ${SSL_DIR+x} ];
-then
-    echo "InternalError: missing 'ssl' directory."
-    exit -1
-fi
-
-if [ -z ${SITE_DIR+x} ];
-then
-    echo "InternalError: missing 'site' directory."
-    exit -1
-fi
-
 set -- "${POSITIONAL[@]}"
 
 docker run -it --rm \
--v "${SSL_DIR}"/etc/letsencrypt:/etc/letsencrypt \
--v "${SSL_DIR}"/var/lib/letsencrypt:/var/lib/letsencrypt \
--v "${SSL_DIR}"/var/log/letsencrypt:/var/log/letsencrypt \
+-v "${OUT_DIR}"/etc/letsencrypt:/etc/letsencrypt \
+-v "${OUT_DIR}"/var/lib/letsencrypt:/var/lib/letsencrypt \
+-v "${OUT_DIR}"/var/log/letsencrypt:/var/log/letsencrypt \
 -v "${SITE_DIR}":/data/letsencrypt \
 certbot/certbot \
 certonly --webroot \
