@@ -21,13 +21,6 @@ Run `get_ssl_cert.sh` script with the following options:
                # note that if you are revoking a certificate that was generated using
                # "test" mode, you will need to pass the "--staging" option as well.
     
-    # General
-    --out-dir  # by default "~/easy_ssl/ssl".
-               # if used in "test" or "prod" mode, the directory will contain all
-               # output from certbot, including certificates.
-               # if used in "info" or "revoke" mode, the value should point to the
-               # directory generated in either "test" or "prod" mode.
-    
     # Certbot options
     -d         # domain name.
                # you can pass as many as you want (see example).
@@ -38,6 +31,14 @@ Run `get_ssl_cert.sh` script with the following options:
     --email    # an email address to be supplied to LetsEncrypt.
                # this is useful if you want to LetsEncrypt to send you expiry notifications.
                # only use in 'prod' mode.
+               
+    # Optional
+    --out-dir  # by default "~/easy_ssl/ssl".
+               # if used in "test" or "prod" mode, the directory will contain all
+               # output from certbot, including certificates.
+               # if used in "info" or "revoke" mode, the value should point to the
+               # directory generated in either "test" or "prod" mode.
+    --skip-dh  # if used, diffie helman parameters file won't be generated.
     
 For example:
 
