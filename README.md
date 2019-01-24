@@ -40,7 +40,7 @@ will also be created. You can then use those files in your Nginx configuration f
         server_name           www.mysite.com
         
         ...
-        s
+
         ssl_certificate       PATH/TO/easy_ssl/ssl/live/mysite.com/fullchain.pem
         ssl_certificate_key   PATH/TO/easy_ssl/ssl/live/mysite.com/privkey.pem
         
