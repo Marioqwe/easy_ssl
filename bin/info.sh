@@ -32,6 +32,6 @@ then
 fi
 
 docker run --rm -it --name certbot \
--v "{SSL_DIR}"/etc/letsencrypt:/etc/letsencrypt \
--v "{SSL_DIR}"/var/lib/letsencrypt:/var/lib/letsencrypt \
+-v "${SSL_DIR}"/etc/letsencrypt:/etc/letsencrypt \
+-v "${SSL_DIR}"/var/lib/letsencrypt:/var/lib/letsencrypt \
 certbot/certbot certificates
