@@ -66,7 +66,7 @@ done
 
 if [ -d "$OUT_DIR" ]
 then
-    if [ "$INFO" = false ]
+    if [ "$INFO" = false ] && [ "$REVOKE" = false ]
     then
         while true;
         do
@@ -79,7 +79,7 @@ then
         done
     fi
 else
-    if [ "$INFO" = true ]
+    if [ "$INFO" = true ] || [ "$REVOKE" = true ]
     then
         echo "Error: \"$OUT_DIR\" doesn't exist."
         exit -1
