@@ -11,7 +11,6 @@ OUT_DIR="$DIR/ssl"
 INFO=false
 TEST=false
 PROD=false
-SKIP_DH=false
 
 while [[ $# -gt 0 ]]
 do
@@ -113,7 +112,7 @@ elif [ "$PROD" = true ]
 then
     bash "${DIR}/bin/run.sh" $@
 
-    if [ "$SKIP_DH" = true ]
+    if [ -z ${SKIP_DH+x} ]
     then
         # Generate a 2048 bit DH param file.
         # See: https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters.
