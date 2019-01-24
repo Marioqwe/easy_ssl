@@ -22,12 +22,24 @@ do
             shift
             shift
             ;;
+        --email)
+            EMAIL=$2
+            shift
+            shift
+            ;;
         *)
             POSITIONAL+=("$1")
             shift
             ;;
     esac
 done
+
+if [ -z ${EMAIL+x} ];
+then
+    POSITIONAL+=("--register-unsafely-without-email")
+else
+    POSITIONAL+=("--email $EMAIL --no-eff-email")
+fi
 
 set -- "${POSITIONAL[@]}"
 
@@ -39,4 +51,4 @@ docker run -it --rm \
 certbot/certbot \
 certonly --webroot \
 --webroot-path=/data/letsencrypt \
---agree-tos --no-eff-email "$@"
+--agree-tos "$@"
