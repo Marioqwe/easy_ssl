@@ -21,16 +21,26 @@ do
             TEST=true
             PROD=false
             INFO=false
+            REVOKE=false
             shift
             ;;
         --info)
             INFO=true
             PROD=false
             TEST=false
+            REVOKE=false
             shift
             ;;
         --prod)
             PROD=true
+            TEST=false
+            INFO=false
+            REVOKE=false
+            shift
+            ;;
+        --revoke)
+            REVOKE=true
+            PROD=false
             TEST=false
             INFO=false
             shift
@@ -101,6 +111,9 @@ then
     # Generate a 2048 bit DH param file.
     # See: https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters.
     openssl dhparam -out "${DIR}/ssl/dhparam-2048.pem" 2048
+elif [ "$REVOKE" = true ]
+then
+    bash "${DIR}/bin/revoke.sh" $@
 else
     echo "Error: no mode provided."
     HAS_ERROR=true
