@@ -2,12 +2,12 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-SSL_DIR="${DIR}/ssl"
-SITE_DIR="${DIR}/site"
-mkdir -p "$SSL_DIR"
+SITE_DIR="$DIR/site"
 
-POSITIONAL=("--ssl-dir ${SSL_DIR} --site-dir ${SITE_DIR}")
+POSITIONAL=("--site-dir $SITE_DIR")
 DOMAINS=()
+
+OUT_DIR="$DIR/ssl"
 INFO=false
 TEST=false
 PROD=false
@@ -19,14 +19,25 @@ do
     case ${key} in
         --test)
             TEST=true
+            PROD=false
+            INFO=false
             shift
             ;;
         --info)
             INFO=true
+            PROD=false
+            TEST=false
             shift
             ;;
         --prod)
             PROD=true
+            TEST=false
+            INFO=false
+            shift
+            ;;
+        --out-dir)
+            OUT_DIR="$2"
+            shift
             shift
             ;;
         -d)
@@ -43,6 +54,28 @@ do
     esac
 done
 
+if [ ! -d "$OUT_DIR" ]
+then
+    if [ "$INFO" = false ]
+    then
+        while true;
+        do
+            read -p "\"$OUT_DIR\" already exists. Do you wish to continue? " yn
+            case $yn in
+                [Yy]* ) break ;;
+                [Nn]* ) exit -1 ;;
+                * ) echo "Please answer yes or no." ;;
+            esac
+        done
+
+        mkdir -p "$OUT_DIR"
+    else
+        echo "Error: \"$OUT_DIR\" doesn't exist."
+        exit -1
+    fi
+fi
+
+POSITIONAL+=("--out-dir $OUT_DIR")
 set -- "${POSITIONAL[@]}"
 
 # Create nginx config file with provided domains as server_name.
@@ -52,13 +85,13 @@ sed "s/server_name.*name.*/server_name $ESCAPED_DOMAINS;/" "${DIR}/misc/base.con
 # Spin up the docker container with the basic nginx server.
 docker-compose -f "${DIR}/docker-compose.yml" up -d > /dev/null 2>&1
 
-if [[ ${TEST} = true  ]]
+if [ "$TEST" = true  ]
 then
     bash "${DIR}/bin/test.sh" $@
-elif [[ ${INFO} = true ]]
+elif [ "$INFO" = true ]
 then
     bash "${DIR}/bin/info.sh" $@
-elif [[ ${PROD} = true ]]
+elif [ "$PROD" = true ]
 then
     bash "${DIR}/bin/run.sh" $@
 
@@ -73,7 +106,7 @@ fi
 # Bring down docker container.
 docker-compose -f "${DIR}/docker-compose.yml" down > /dev/null 2>&1
 
-if [[ ${HAS_ERROR} = true ]]
+if [ "$HAS_ERROR" = true ]
 then
     exit -1
 fi
