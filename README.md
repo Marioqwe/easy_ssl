@@ -17,18 +17,22 @@ Run `get_ssl_cert.sh` script with the following options:
                # useful to test if your domain works.
     --info     # get additional information about certificates for your domain.
     --prod     # request certificate.
+    --revoke   # revoke certificate.
     
     # General
     --out-dir  # by default "~/easy_ssl/ssl".
                # if used in "test" or "prod" mode, the directory will contain all
                # output from certbot, including certificates.
-               # if used in "info" mode, the value should point to the directory
-               # generated in either "test" or "prod" mode.
+               # if used in "info" or "revoke" mode, the value should point to the
+               # directory generated in either "test" or "prod" mode.
     
     # Certbot options
     -d         # domain name.
                # you can pass as many as you want (see example).
                # note that all domains you pass here will share the same SSL/TLS certificate.
+               # if used in "info" mode, this option is ignored.
+               # if used in "revoke" mode, the certificate associated with the domain will be
+               # revoked.
     --email    # an email address to be supplied to LetsEncrypt.
                # this is useful if you want to LetsEncrypt to send you expiry notifications.
                # only use in 'prod' mode.
