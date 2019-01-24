@@ -54,7 +54,7 @@ do
     esac
 done
 
-if [ ! -d "$OUT_DIR" ]
+if [ -d "$OUT_DIR" ]
 then
     if [ "$INFO" = false ]
     then
@@ -67,11 +67,14 @@ then
                 * ) echo "Please answer yes or no." ;;
             esac
         done
-
-        mkdir -p "$OUT_DIR"
-    else
+    fi
+else
+    if [ "$INFO" = true ]
+    then
         echo "Error: \"$OUT_DIR\" doesn't exist."
         exit -1
+    else
+        mkdir -p "$OUT_DIR"
     fi
 fi
 
