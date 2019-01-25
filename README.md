@@ -72,10 +72,12 @@ To get information about the certificate:
 
     bash get_ssl_cert.sh --info
 
-To renew the certificate, include the generated `nginx.conf` file in your nginx configuration and
-run the following command:
+To renew the certificate:
 
     bash get_ssl_cert.sh --renew --dev-server
+
+If you already have nginx up and listening on port 80, simply include the generated `nginx.conf` file
+in your main nginx configuration file and run the above command without the `dev-server` option.
 
 To revoke the certificate:
 
