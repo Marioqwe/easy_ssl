@@ -98,7 +98,12 @@ fi
 # Create nginx config file.
 ESCAPED_DOMAINS="$(echo "${DOMAINS[@]}" | sed "s/\./\\\./g")"
 sed "s|server_name.*name.*|server_name $ESCAPED_DOMAINS;|" "${DIR}/misc/base.conf" > "${DIR}/nginx.conf"
-sed -i "" "s|root.*certbot-root.*|root $SITE_DIR;|" "${DIR}/nginx.conf"
+
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Darwin*) sed -i "" "s|root.*certbot-root.*|root $SITE_DIR;|" "${DIR}/nginx.conf" ;;
+    *) sed -i "s|root.*certbot-root.*|root $SITE_DIR;|" "${DIR}/nginx.conf" ;;
+esac
 
 # Create docker-compose file.
 sed "s|- \./site:<certbot-root>|- \./site:${SITE_DIR}|" "${DIR}/misc/docker-compose.base.yml" > "${DIR}/docker-compose.yml"
