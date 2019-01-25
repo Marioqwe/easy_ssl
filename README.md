@@ -67,8 +67,16 @@ will also be created. You can then use those files in your Nginx configuration f
         
         ...
     }
-    
+
+To get information about the certificate:
+
+    bash get_ssl_cert.sh --info
+
 To renew the certificate, include the generated `nginx.conf` file in your nginx configuration and
 run the following command:
 
     bash get_ssl_cert.sh --renew --dev-server
+
+To revoke the certificate:
+
+    bash get_ssl_cert.sh --revoke -d "www.mysite.com"
