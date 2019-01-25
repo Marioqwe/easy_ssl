@@ -64,7 +64,7 @@ done
 
 if [ -d "$OUT_DIR" ]
 then
-    if [ "$INFO" = false ] && [ "$REVOKE" = false ]
+    if [ -z ${INFO+x} ] && [ -z ${REVOKE+x} ]
     then
         while true;
         do
