@@ -64,7 +64,7 @@ done
 
 if [ -d "$OUT_DIR" ]
 then
-    if [ -z ${INFO+x} ] && [ -z ${REVOKE+x} ]
+    if [ -z ${INFO+x} ] && [ -z ${REVOKE+x} ] && [ -z ${RENEW+x} ]
     then
         while true;
         do
@@ -77,7 +77,7 @@ then
         done
     fi
 else
-    if [ "$INFO" = true ] || [ "$REVOKE" = true ]
+    if [ "$INFO" = true ] || [ "$REVOKE" = true ] || [ "$RENEW" = true ]
     then
         echo "Error: \"$OUT_DIR\" doesn't exist."
         exit -1
