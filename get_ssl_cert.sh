@@ -91,7 +91,7 @@ set -- "${POSITIONAL[@]}"
 
 if [ "$RENEW" = true ] && [ "$DEV_SERVER" = false ]
 then
-    bash "${DIR}/bin/renew.sh" "$@"
+    bash "${DIR}/bin/renew.sh" $@
     exit 0
 fi
 
@@ -114,13 +114,13 @@ docker-compose -f "${DIR}/docker-compose.yml" up -d > /dev/null 2>&1
 
 if [ "$TEST" = true  ]
 then
-    bash "${DIR}/bin/test.sh" "$@"
+    bash "${DIR}/bin/test.sh" $@
 elif [ "$INFO" = true ]
 then
-    bash "${DIR}/bin/info.sh" "$@"
+    bash "${DIR}/bin/info.sh" $@
 elif [ "$PROD" = true ]
 then
-    bash "${DIR}/bin/run.sh" "$@"
+    bash "${DIR}/bin/run.sh" $@
 
     if [ -z ${SKIP_DH+x} ]
     then
@@ -130,10 +130,10 @@ then
     fi
 elif [ "$REVOKE" = true ]
 then
-    bash "${DIR}/bin/revoke.sh" "$@"
+    bash "${DIR}/bin/revoke.sh" $@
 elif [ "$RENEW" = true ]
 then
-    bash "${DIR}/bin/renew.sh" "$@"
+    bash "${DIR}/bin/renew.sh" $@
 else
     echo "Error: no mode provided."
     HAS_ERROR=true
