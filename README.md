@@ -68,5 +68,7 @@ will also be created. You can then use those files in your Nginx configuration f
         ...
     }
     
-To renew the certificate, include the generated `nginx.conf` file in your nginx configuration.
-Note you will only be able to renew a certificate
+To renew the certificate, include the generated `nginx.conf` file in your nginx configuration and
+run the following command:
+
+    bash get_ssl_cert.sh --renew --dev-server
