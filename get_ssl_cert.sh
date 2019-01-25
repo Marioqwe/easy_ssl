@@ -8,6 +8,7 @@ POSITIONAL=("--site-dir $SITE_DIR")
 DOMAINS=()
 
 OUT_DIR="$DIR/ssl"
+DEV_SERVER=false
 
 while [[ $# -gt 0 ]]
 do
@@ -30,8 +31,16 @@ do
             REVOKE=true
             shift
             ;;
+        --renew)
+            RENEW=true
+            shift
+            ;;
         --skip-dh)
             SKIP_DH=true
+            shift
+            ;;
+        --dev-server)
+            DEV_SERVER=true
             shift
             ;;
         --out-dir)
@@ -80,6 +89,12 @@ fi
 POSITIONAL+=("--out-dir $OUT_DIR")
 set -- "${POSITIONAL[@]}"
 
+if [ "$RENEW" = true ] && [ "$DEV_SERVER" = false ]
+then
+    bash "${DIR}/bin/renew.sh"
+    exit 0
+fi
+
 # Create nginx config file.
 ESCAPED_DOMAINS="$(echo "${DOMAINS[@]}" | sed "s/\./\\\./g")"
 sed "s|server_name.*name.*|server_name $ESCAPED_DOMAINS;|" "${DIR}/misc/base.conf" > "${DIR}/nginx.conf"
@@ -111,6 +126,9 @@ then
 elif [ "$REVOKE" = true ]
 then
     bash "${DIR}/bin/revoke.sh" $@
+elif [ "$RENEW" = true ]
+then
+    bash "${DIR}/bin/renew.sh"
 else
     echo "Error: no mode provided."
     HAS_ERROR=true
