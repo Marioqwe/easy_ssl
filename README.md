@@ -45,7 +45,7 @@ Run `get_ssl_cert.sh` script with the following options:
     
 For example:
 
-    bash get_ssl_cert.sh --prod -d "mysite.com" -d "www.mysite.com" --email "myemail@email.com"
+    bash get_ssl_cert.sh --prod -d "www.mysite.com" --email "myemail@email.com"
 
 will create a folder `ssl` in the current directory with an ssl certificate and ssl certificate key.
 A [Diffie Hellman parameters](https://wiki.openssl.org/index.php/Diffie-Hellman_parameters) file
