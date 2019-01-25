@@ -8,9 +8,6 @@ POSITIONAL=("--site-dir $SITE_DIR")
 DOMAINS=()
 
 OUT_DIR="$DIR/ssl"
-INFO=false
-TEST=false
-PROD=false
 
 while [[ $# -gt 0 ]]
 do
@@ -19,30 +16,18 @@ do
     case ${key} in
         --test)
             TEST=true
-            PROD=false
-            INFO=false
-            REVOKE=false
             shift
             ;;
         --info)
             INFO=true
-            PROD=false
-            TEST=false
-            REVOKE=false
             shift
             ;;
         --prod)
             PROD=true
-            TEST=false
-            INFO=false
-            REVOKE=false
             shift
             ;;
         --revoke)
             REVOKE=true
-            PROD=false
-            TEST=false
-            INFO=false
             shift
             ;;
         --skip-dh)
