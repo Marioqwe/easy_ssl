@@ -126,7 +126,7 @@ then
     then
         # Generate a 2048 bit DH param file.
         # See: https://security.stackexchange.com/questions/94390/whats-the-purpose-of-dh-parameters.
-        openssl dhparam -out "${DIR}/ssl/dhparam-2048.pem" 2048
+        openssl dhparam -out "${OUT_DIR}/dhparam-2048.pem" 2048
     fi
 elif [ "$REVOKE" = true ]
 then
