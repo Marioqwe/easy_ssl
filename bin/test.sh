@@ -46,4 +46,4 @@ certbot/certbot \
 certonly --webroot \
 --webroot-path=/data/letsencrypt \
 --register-unsafely-without-email --agree-tos \
---staging "$@"
+--staging $@

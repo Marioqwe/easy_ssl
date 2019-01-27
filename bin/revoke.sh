@@ -35,4 +35,4 @@ set -- "${POSITIONAL[@]}"
 docker run --rm -it --name certbot \
 -v "${OUT_DIR}"/etc/letsencrypt:/etc/letsencrypt \
 -v "${OUT_DIR}"/var/lib/letsencrypt:/var/lib/letsencrypt \
-certbot/certbot revoke --cert-path /etc/letsencrypt/live/"${DOMAIN}"/cert.pem "$@"
+certbot/certbot revoke --cert-path /etc/letsencrypt/live/"${DOMAIN}"/cert.pem $@
