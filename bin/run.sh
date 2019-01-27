@@ -51,4 +51,4 @@ docker run -it --rm \
 certbot/certbot \
 certonly --webroot \
 --webroot-path=/data/letsencrypt \
---agree-tos "$@"
+--agree-tos $@
